@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "css/detail.css"%}">
+    <title></title>
+</head>
+<body><br><br><br>
+   <div class="container">
+       <h1>IPL 2020</h1>
+          by {{post.author}} on {{post.publish}}
+       <hr>
+    {{post.body}}
+       <hr>
+       <h2>comments...</h2><hr>
+             <div align=""><button type="button" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#de">Add comment</button></div><br>
+             <div id="de" class="collapse">
+                    <div class="form-group">
+               <form method="POST" action="{{post.get_absolute_url}}">
+                   {{form.as_table}}
+                   {% csrf_token %}
+                 <input type="submit" class="btn btn-info btn-sm" value="submit comment">
+               </form>
+             </div>
+             </div>
+          {%for c in Comment_list %}
+           <hr>
+            <img src="https://cdn3.iconfinder.com/data/icons/users-6/100/654853-user-men-2-512.png" alt="logo">
+             <strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                 by {{c.name}}
+                 on {{c.date_added}}
+             </strong>
+             <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+               {{c.body}}
+                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+                <div align="right"><button type="button" class="btn btn-info btn-sm" data-toggle="collapse" data-target="#demo">Reply</button></div>
+                <div id="demo" class="collapse">
+                          <div class="form-group">
+                              <form method="POST" action="{{post.get_absolute_url}}">
+                                 {{form.as_table}}
+                                 {% csrf_token %}
+                                  <input type="submit" class="btn btn-info btn-sm" value="Add reply">
+                              </form>
+                          </div>
+                </div>
+             <br><br>
+           <hr>
+          {% endfor %}
+   </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

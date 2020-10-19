@@ -1,0 +1,29 @@
+.container{
+height: 310px;
+margin: 200px;
+}
+img{
+height: 330px;
+width: 350px;
+float: left;
+}
+img:hover {
+border: 0.2px solid #777;
+}
+
+.dropdown {
+padding: 15px;
+}
+
+.dp {
+padding:  4px 370px;
+}
+
+.lop {
+padding: 0px 370px;
+}
+
+.dropdown-menu {
+float: right;
+}
+

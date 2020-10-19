@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static "css/home.css"%}">
+    <title></title>
+</head>
+<body>
+<div class="container">
+  <div class="panel panel-default">
+        <img src="https://www.jagranimages.com/images/2020/jan/ipl2020schedule1580186125646.jpg" alt="ipl">
+         {% for post in post_list %}
+         <h5>&nbsp<br>&nbsp&nbsp&nbsp&nbsp<a class="" href="{{post.get_absolute_url}}">{{post.title}}</a></h5>
+         <div align="center">{{post.body| truncatewords:40 |linebreaks}}</div><br>
+         <div class="lop"><p>{{post.publish}}</p></div>
+         {% endfor %}
+      <hr>
+      <div class="dp">
+        <form method="POST" >
+            {{form.as_p}}
+            {% csrf_token %}
+            <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-primary btn-sm">Like</button> - {{total_likes}} Likes
+        </form>
+      </div>&nbsp&nbsp
+        <div class="dropdown" align="right">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                share from
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="{% url 'social:begin' 'facebook' %}">Facebook</a> </li>
+                <li><a href="#">Twitter</a> </li>
+                <li><a href="">Github</a> </li>
+            </ul><br><br>
+        </div>
+  </div>
+</div>
+</body>
+</html>
